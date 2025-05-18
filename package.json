@@ -1,0 +1,22 @@
+{
+  "name": "realworld-playwright-tests",
+  "version": "1.0.0",
+  "description": "5 тестов для RealWorld",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:headed": "npx playwright test --headed",
+    "report": "npx playwright show-report"
+  },
+  "keywords": [
+    "playwright",
+    "testing",
+    "automation"
+  ],
+  "author": "menchi-fr",
+  "license": "ISC",
+  "devDependencies": {
+    "@faker-js/faker": "^8.0.2",
+    "@playwright/test": "^1.37.1"
+  }
+}
