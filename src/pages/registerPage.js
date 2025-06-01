@@ -1,72 +1,46 @@
-// src/pages/registerPage.js
-import { test } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 
 export class RegisterPage {
+  
   constructor(page) {
-    // Сохраняем объект страницы
     this.page = page;
-    
-    // Локаторы из codegen
-    // Заголовок "Sign up"
-    this.heading = page.getByRole('heading', { name: 'Sign up' });
-    
-    // Ссылка "login"
-    this.loginLink = page.getByRole('link', { name: 'login' });
-    
-    // Поля ввода
-    this.usernameInput = page.getByRole('textbox', { name: 'Username' });
+    this.heading = page.getByRole('heading');
+    this.nameInput = page.getByRole('textbox', { name: 'Your Name' });
     this.emailInput = page.getByRole('textbox', { name: 'Email' });
     this.passwordInput = page.getByRole('textbox', { name: 'Password' });
-    
-    // Ссылки в навигации
-    this.homeLink = page.getByLabel('Home');
-    this.signInLink = page.getByLabel('Sign in');
-    this.signUpLink = page.getByLabel('Sign up');
-    
-    // Ссылка на глобальную ленту
-    this.globalFeedLink = page.getByRole('navigation').getByRole('link', { name: 'global-feed' });
-    
-    // Кнопка регистрации (добавим, хотя её нет в codegen)
+    this.homeLink = page.getByRole('link', { name: ' Home' });
+    this.loginLink = page.getByRole('link', { name: ' Login' });
+    this.signUpLink = page.getByRole('link', { name: 'Sign up' });
+    this.logo = page.getByRole('navigation').getByRole('link', { name: 'conduit' });
     this.signUpButton = page.getByRole('button', { name: 'Sign up' });
   }
 
-  // Метод для проверки всех элементов на странице
-  async checkAllElements() {
-    await test.step('Проверить все элементы на странице регистрации', async () => {
-      // Проверяем заголовок
-      await this.heading.isVisible();
-      
-      // Проверяем ссылку на логин
-      await this.loginLink.isVisible();
-      
-      // Проверяем поля ввода
-      await this.usernameInput.isVisible();
-      await this.emailInput.isVisible();
-      await this.passwordInput.isVisible();
-      
-      // Проверяем ссылки в навигации
-      await this.homeLink.isVisible();
-      await this.signInLink.isVisible();
-      await this.signUpLink.isVisible();
-      
-      // Проверяем ссылку на глобальную ленту
-      await this.globalFeedLink.isVisible();
-    });
-  }
-
-  // Метод для регистрации пользователя
-  async register(user) {
-    await test.step('Зарегистрировать нового пользователя', async () => {
-      // Заполняем поля
-      await this.usernameInput.fill(user.username);
+  async registerUser(user) {
+    await test.step('Заполнить форму регистрации и отправить', async () => {
+      await this.nameInput.fill(user.username);
       await this.emailInput.fill(user.email);
       await this.passwordInput.fill(user.password);
       
-      // Делаем скриншот заполненной формы (для отладки)
-      await this.page.screenshot({ path: 'register-form.png' });
+      await this.page.screenshot({ 
+        path: `register-form-${user.username}.png`,
+        fullPage: true 
+      });
       
-      // Нажимаем кнопку регистрации
       await this.signUpButton.click();
+    });
+  }
+
+  async checkAllUIElements() {
+    await test.step('Проверить все элементы UI на странице регистрации', async () => {
+      await expect(this.heading).toContainText('Sign up');
+      await expect(this.nameInput).toBeVisible();
+      await expect(this.emailInput).toBeVisible();
+      await expect(this.passwordInput).toBeVisible();
+      await expect(this.homeLink).toBeVisible();
+      await expect(this.loginLink).toBeVisible();
+      await expect(this.signUpLink).toBeVisible();
+      await expect(this.logo).toBeVisible();
+      await expect(this.signUpButton).toBeVisible();
     });
   }
 }
