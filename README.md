@@ -1,4 +1,3 @@
-# Daria_QA.GURU
 В проекте 5 независимых автотестов для https://realworld.qa.guru/.
 
 Описание тестов:
