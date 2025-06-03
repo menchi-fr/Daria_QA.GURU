@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 
 export class LoginPage {
   
@@ -20,16 +20,20 @@ export class LoginPage {
         fullPage: true 
       });
       
-      await this.page.waitForTimeout(500);
+      //await this.page.waitForTimeout(500);
       await this.loginButton.click();
     });
   }
 
-  async checkLoginPageElements() {
-    await test.step('Проверить элементы страницы логина', async () => {
-      await expect(this.emailInput).toBeVisible();
-      await expect(this.passwordInput).toBeVisible();
-      await expect(this.loginButton).toBeVisible();
-    });
+getEmailInput() {
+    return this.emailInput;
+  }
+  
+  getPasswordInput() {
+    return this.passwordInput;
+  }
+  
+  getLoginButton() {
+    return this.loginButton;
   }
 }
