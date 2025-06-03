@@ -7,9 +7,7 @@ export class YourFeedPage {
     this.navigation = page.getByRole('navigation');
   }
 
-  async checkUserNameInNavigation(expectedUsername) {
-    await test.step(`Проверить что в навигации отображается имя "${expectedUsername}"`, async () => {
-      await expect(this.navigation).toContainText(expectedUsername);
-    });
+  getUserNameInNavigation() {
+    return this.navigation;
   }
 }
