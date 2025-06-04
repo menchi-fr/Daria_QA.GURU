@@ -29,18 +29,39 @@ export class RegisterPage {
       await this.signUpButton.click();
     });
   }
+ getHeading() {
+    return this.heading;
+  }
 
-  async checkAllUIElements() {
-    await test.step('Проверить все элементы UI на странице регистрации', async () => {
-      await expect(this.heading).toContainText('Sign up');
-      await expect(this.nameInput).toBeVisible();
-      await expect(this.emailInput).toBeVisible();
-      await expect(this.passwordInput).toBeVisible();
-      await expect(this.homeLink).toBeVisible();
-      await expect(this.loginLink).toBeVisible();
-      await expect(this.signUpLink).toBeVisible();
-      await expect(this.logo).toBeVisible();
-      await expect(this.signUpButton).toBeVisible();
-    });
+  getNameInput() {
+    return this.nameInput;
+  }
+
+  getEmailInput() {
+    return this.emailInput;
+  }
+
+  getPasswordInput() {
+    return this.passwordInput;
+  }
+
+  getHomeLink() {
+    return this.homeLink;
+  }
+
+  getLoginLink() {
+    return this.loginLink;
+  }
+
+  getSignUpLink() {
+    return this.signUpLink;
+  }
+
+  getLogo() {
+    return this.logo;
+  }
+
+  getSignUpButton() {
+    return this.signUpButton;
   }
 }

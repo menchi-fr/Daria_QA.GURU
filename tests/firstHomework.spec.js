@@ -9,7 +9,16 @@ test('Проверка что страница регистрации выгля
   
   await homePage.open();
   await homePage.gotoSignUp();
-  await registerPage.checkAllUIElements();
+
+await expect(registerPage.getHeading()).toContainText('Sign up');
+await expect(registerPage.getNameInput()).toBeVisible();
+await expect(registerPage.getEmailInput()).toBeVisible();
+await expect(registerPage.getPasswordInput()).toBeVisible();
+await expect(registerPage.getHomeLink()).toBeVisible();
+await expect(registerPage.getLoginLink()).toBeVisible();
+await expect(registerPage.getSignUpLink()).toBeVisible();
+await expect(registerPage.getLogo()).toBeVisible();
+await expect(registerPage.getSignUpButton()).toBeVisible();
 });
 
 //Тест 2
